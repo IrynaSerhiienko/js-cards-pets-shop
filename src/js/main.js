@@ -1,7 +1,7 @@
 (function () {
   const pets = [
     {
-      name: "Скоттиш фолд", // Порода
+      name: "scotish", // Порода
       description:
         "Золотой шотландский вислоухий кот ждет в гости кошечку для совместного времяпровождения. Одной встречи достаточно для получения красивого и здорового потомства. У полуторагодовалого",
       location: "Київ, Київська область",
@@ -9,7 +9,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/4ZN2o7krAB7SsGcJjX93.webp",
     },
     {
-      name: "Скоттиш фолд", // Порода
+      name: "scotish", // Порода
       description:
         "Гарний ,охайний котик. Привчений до лотка,їсть сухий корм. Любить гратися. Котику майже 4 місяці.( В подарунок 2 лоточка для туалету.",
       location: "Київ, Київська область",
@@ -17,7 +17,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/o4b5MCkz9QUV6sgVCPzV.webp",
     },
     {
-      name: "Другая", // Порода
+      name: "another", // Порода
       description:
         "Все вопросы обсуждаются в телефонном разговоре, а не в переписке. Большая просьба звонить с 10 до 20 часов.Елка - глазастая, красивая и яркая, но колкая, если хочешь прикоснуться. Елка из тех",
       location: "Київ, Київська область",
@@ -25,7 +25,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/jKmG4ZOy05MmybPcazEl.webp",
     },
     {
-      name: "Экзотическая короткошерстная", // Порода
+      name: "ekzotik", // Порода
       description:
         "Великолепный малыш Экзот, 2 месяца Лоток и когтеточку знает без проблем. Очень ласковый и нежная мальчик. Питание : сухой корм премиум класса и натуралка. Больше фото и видео вышлю в",
       location: "Київ, Київська область",
@@ -33,7 +33,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/WZ0RZ4x6GQ2VUENFTPrm.webp",
     },
     {
-      name: "Экзотическая короткошерстная", // Порода
+      name: "ekzotik", // Порода
       description:
         "Экзотический мальчик медвежульного типа) Упитанный и классный! С отличным костяком Чистокровный, обучен лотку Пишите в вайбер вышлю больше фото, видео",
       location: "Київ, Київська область",
@@ -75,7 +75,56 @@
       sortByPriceMax(pets);
     });
   }
+  ////////////////////////////////////////////////////
+  let select = document.getElementById("select");
 
+  // let scotish = document.getElementById("scotish");
+  // let another = document.getElementById("another");
+  // let ekzotik = document.getElementById("ekzotik");
+  //   pets__item
+  let petItem = document.querySelectorAll(".pets__item");
+  console.log(`petItem: ${petItem}`);
+
+  select.addEventListener("change", (e) => {
+    let filter = e.target;
+    // console.log(filter);
+    console.log(filter.value);
+
+    petItem.forEach((element) => {
+      element.classList.remove("hide");
+      if (filter.value !== "Скоттиш фолд") {
+        // console.log("Скоттиш фолд");
+        element.classList.add("hide");
+      } else {
+        console.log("Скоттиш фолд");
+        // element.classList.remove("hide");
+      }
+      if (filter.value !== "Другая") {
+        // console.log("Другая");
+        element.classList.add("hide");
+      } else {
+        console.log("Другая");
+        // element.classList.remove("hide");
+      }
+      if (filter.value !== "Экзотическая короткошерстная") {
+        // console.log("Экзотическая короткошерстная");
+        element.classList.add("hide");
+      } else {
+        console.log("Экзотическая короткошерстная");
+        element.classList.remove("hide");
+      }
+    });
+    // console.log(select.value);
+    // if (select.value !== "Скоттиш фолд") {
+    //   console.log("Yes");
+    //   pets__item.classList.add("hide");
+    // } else {
+    //   console.log("No");
+    //   pets__item.classList.remove("hide");
+    // }
+  });
+
+  ////////////////////////////////////////////////////////
   function renderPets(pets) {
     const temp = JSON.parse(JSON.stringify(pets));
     const petsContainer = document.querySelector(".pets__container");
@@ -92,21 +141,4 @@
           `;
     });
   }
-
-  //   let option = document.querySelectorAll('option');
-
-  //   let scotish = document.querySelector(".scotish");
-  //   scotish.addEventListener("click", () => {
-  //     scotish.classList.add("hide");
-  //   });
-
-  //   let another = document.querySelector(".another");
-  //   another.addEventListener("click", () => {
-  //     another.classList.add("hide");
-  //   });
-
-  //   let ekzotik = document.querySelector(".ekzotik");
-  //   ekzotik.addEventListener("click", () => {
-  //     ekzotik.classList.add("hide");
-  //   });
 })();
