@@ -1,7 +1,12 @@
 (function () {
+  const petsContainer = document.querySelector(".pets__container");
+  const petItem = document.querySelectorAll(".pets__item");
+  const selectCategory = document.querySelector("#select-category");
+  const btn = document.querySelectorAll(".nav__btn");
+
   const pets = [
     {
-      name: "scotish", // Порода
+      name: "scotish",
       description:
         "Золотой шотландский вислоухий кот ждет в гости кошечку для совместного времяпровождения. Одной встречи достаточно для получения красивого и здорового потомства. У полуторагодовалого",
       location: "Київ, Київська область",
@@ -9,7 +14,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/4ZN2o7krAB7SsGcJjX93.webp",
     },
     {
-      name: "scotish", // Порода
+      name: "scotish",
       description:
         "Гарний ,охайний котик. Привчений до лотка,їсть сухий корм. Любить гратися. Котику майже 4 місяці.( В подарунок 2 лоточка для туалету.",
       location: "Київ, Київська область",
@@ -17,7 +22,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/o4b5MCkz9QUV6sgVCPzV.webp",
     },
     {
-      name: "another", // Порода
+      name: "another",
       description:
         "Все вопросы обсуждаются в телефонном разговоре, а не в переписке. Большая просьба звонить с 10 до 20 часов.Елка - глазастая, красивая и яркая, но колкая, если хочешь прикоснуться. Елка из тех",
       location: "Київ, Київська область",
@@ -25,7 +30,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/jKmG4ZOy05MmybPcazEl.webp",
     },
     {
-      name: "ekzotik", // Порода
+      name: "ekzotik",
       description:
         "Великолепный малыш Экзот, 2 месяца Лоток и когтеточку знает без проблем. Очень ласковый и нежная мальчик. Питание : сухой корм премиум класса и натуралка. Больше фото и видео вышлю в",
       location: "Київ, Київська область",
@@ -33,7 +38,7 @@
       url: "https://d1opu7v3g3cdvy.cloudfront.net/213x160/WZ0RZ4x6GQ2VUENFTPrm.webp",
     },
     {
-      name: "ekzotik", // Порода
+      name: "ekzotik",
       description:
         "Экзотический мальчик медвежульного типа) Упитанный и классный! С отличным костяком Чистокровный, обучен лотку Пишите в вайбер вышлю больше фото, видео",
       location: "Київ, Київська область",
@@ -43,12 +48,11 @@
   ];
 
   renderPets(pets);
-  const petsContainer = document.querySelector(".pets__container");
 
   function sortByPriceMin(pets) {
     const temp = JSON.parse(JSON.stringify(pets));
     temp.forEach((pet) => {
-      pet.price = +pet.price.replace(/\D/g, "");
+      pet.price = +pet.price.replace(/\D/g, ""); //залишає тільки цифри, може працювати і з 4 500 грн, де є пробіли, працює коректно!
     });
     temp.sort((a, b) => (a.price > b.price ? 1 : -1));
     petsContainer.innerHTML = "";
@@ -65,8 +69,6 @@
     renderPets(temp);
   }
 
-  let btn = document.querySelectorAll(".nav__btn");
-
   for (let i = 0; i < btn.length; i++) {
     btn[0].addEventListener("click", () => {
       sortByPriceMin(pets);
@@ -75,59 +77,35 @@
       sortByPriceMax(pets);
     });
   }
-  ////////////////////////////////////////////////////
-  let select = document.getElementById("select");
 
-  // let scotish = document.getElementById("scotish");
-  // let another = document.getElementById("another");
-  // let ekzotik = document.getElementById("ekzotik");
-  //   pets__item
-  let petItem = document.querySelectorAll(".pets__item");
-  console.log(`petItem: ${petItem}`);
+  selectCategory.onclick = () => {
+    if (selectCategory.value != "all") {
+      petItem.innerHTML = "";
+      let arr = pets.filter((pet) => pet.name === selectCategory.value);
 
-  select.addEventListener("change", (e) => {
-    let filter = e.target;
-    // console.log(filter);
-    console.log(filter.value);
+      renderPets(arr);
 
-    petItem.forEach((element) => {
-      element.classList.remove("hide");
-      if (filter.value !== "Скоттиш фолд") {
-        // console.log("Скоттиш фолд");
-        element.classList.add("hide");
-      } else {
-        console.log("Скоттиш фолд");
-        // element.classList.remove("hide");
-      }
-      if (filter.value !== "Другая") {
-        // console.log("Другая");
-        element.classList.add("hide");
-      } else {
-        console.log("Другая");
-        // element.classList.remove("hide");
-      }
-      if (filter.value !== "Экзотическая короткошерстная") {
-        // console.log("Экзотическая короткошерстная");
-        element.classList.add("hide");
-      } else {
-        console.log("Экзотическая короткошерстная");
-        element.classList.remove("hide");
-      }
-    });
-    // console.log(select.value);
-    // if (select.value !== "Скоттиш фолд") {
-    //   console.log("Yes");
-    //   pets__item.classList.add("hide");
-    // } else {
-    //   console.log("No");
-    //   pets__item.classList.remove("hide");
-    // }
-  });
+      btn[0].addEventListener("click", () => {
+        sortByPriceMin(arr);
+      });
+      btn[1].addEventListener("click", () => {
+        sortByPriceMax(arr);
+      });
+    } else {
+      renderPets(pets);
 
-  ////////////////////////////////////////////////////////
+      btn[0].addEventListener("click", () => {
+        sortByPriceMin(pets);
+      });
+
+      btn[1].addEventListener("click", () => {
+        sortByPriceMax(pets);
+      });
+    }
+  };
+
   function renderPets(pets) {
     const temp = JSON.parse(JSON.stringify(pets));
-    const petsContainer = document.querySelector(".pets__container");
     petsContainer.innerHTML = "";
     temp.forEach((pet) => {
       petsContainer.innerHTML += `
