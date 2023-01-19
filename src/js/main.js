@@ -78,7 +78,7 @@
     });
   }
 
-  selectCategory.onclick = () => {
+  selectCategory.addEventListener("click", () => {
     if (selectCategory.value != "all") {
       petItem.innerHTML = "";
       let arr = pets.filter((pet) => pet.name === selectCategory.value);
@@ -102,7 +102,33 @@
         sortByPriceMax(pets);
       });
     }
-  };
+  });
+
+  //   selectCategory.onclick = () => {
+  //     if (selectCategory.value != "all") {
+  //       petItem.innerHTML = "";
+  //       let arr = pets.filter((pet) => pet.name === selectCategory.value);
+
+  //       renderPets(arr);
+
+  //       btn[0].addEventListener("click", () => {
+  //         sortByPriceMin(arr);
+  //       });
+  //       btn[1].addEventListener("click", () => {
+  //         sortByPriceMax(arr);
+  //       });
+  //     } else {
+  //       renderPets(pets);
+
+  //       btn[0].addEventListener("click", () => {
+  //         sortByPriceMin(pets);
+  //       });
+
+  //       btn[1].addEventListener("click", () => {
+  //         sortByPriceMax(pets);
+  //       });
+  //     }
+  //   };
 
   function renderPets(pets) {
     const temp = JSON.parse(JSON.stringify(pets));
