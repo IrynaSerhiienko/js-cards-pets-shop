@@ -78,7 +78,7 @@
     });
   }
 
-  selectCategory.addEventListener("click", () => {
+  selectCategory.addEventListener("change", () => {
     if (selectCategory.value != "all") {
       petItem.innerHTML = "";
       let arr = pets.filter((pet) => pet.name === selectCategory.value);
